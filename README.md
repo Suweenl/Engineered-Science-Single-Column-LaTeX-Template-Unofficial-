@@ -1,57 +1,102 @@
 # Engineered Science 单栏 LaTeX 模板（非官方）
 
-> 一个仿制 *Engineered Science* 期刊作者模板版式的非官方 LaTeX 类，复现其单栏页面几何、蓝色上标数字引用以及图表标题样式。本项目与该期刊无隶属或背书关系，仅供研究与教学用途。
-
-> **免责声明**：本仓库仅在外观和排版风格上对 *Engineered Science* 期刊模板进行复现，**并非官方模板**。投稿前请务必以期刊最新作者指南为准。
-
-## ✨ 主要特性
-
-- **单栏**版式，自定义纸张尺寸 **22.2 cm × 28.5 cm**
-- **蓝色上标**数字引用（`[n]`）；**多条引用**时逗号同样为上标显示
-- `Fig.` / `Table` 标签**蓝色加粗**
-- 内置便捷交叉引用宏：`\\figref`、`\\tabref`、`\\secref`、`\\eqnref`
-- `biblatex + biber`：数值型样式、作者不省略；期刊名为**蓝色斜体**
-- 常用缩写宏：`\\etal`、`\\eg`（带智能点号/空格）
+> 这是一个 **非官方** 的 LaTeX ，用于复现 *Engineered Science* 期刊的单栏排版风格：自定义纸张尺寸、蓝色上标数字引用、蓝色粗体图表标题等。该项目与期刊**无隶属或背书关系**，仅供研究与教学使用。投稿请以期刊**最新官方指南**为准。
 
 ---
 
-## 🔧 快速开始
+## 一、模板适用与特点
 
+- **目标期刊**：*Engineered Science*（仿制其外观与样式，**非官方**）  
+- **排版**：单栏、纸张 **22.2 cm × 28.5 cm**
+- **引用**：文中 `\cite{}` 输出 **蓝色上标** `[n]`，多条合并时**逗号也上标**
+- **图表**：`Fig.` / `Table` 标签为**蓝色加粗**，说明文字黑色
+- **交叉引用**：内置 `\figref`、`\tabref`、`\secref`、`\eqnref`，点击即跳转
+- **子图**：启用 `subcaption`，支持 **1×N** 横排（单行多图）
+- **文献**：`biblatex + biber` 数值型样式，期刊名为**蓝色斜体**
 
-### 最小 `main.tex`
+> 适合在 Overleaf 或本地 XeLaTeX / LuaLaTeX 环境使用。
+
+---
+
+## 二、版式与字体规范（一目了然）
+
+**页面与正文**  
+- 纸张：`22.2 cm × 28.5 cm`  
+- 正文字体：Times New Roman，**12pt**  
+- 段落缩进：普通段落 **1.5em**；**章节标题后的首段不缩进**（保持 LaTeX 默认）
+
+**标题层级**  
+- Section：Times New Roman，**10.5pt 加粗**（编号如 “1.”）  
+- Subsection：Times New Roman，**10.5pt 加粗**  
+- Subsubsection：Times New Roman，**10.5pt 加粗**
+
+**首页信息（\maketitle）**  
+- 标题：**Calibri 20pt 加粗**  
+- 作者：Times New Roman **10pt**  
+- 单位：Times New Roman **9pt 斜体**  
+- 日期：Times New Roman **10pt**
+
+**摘要与关键词**  
+- “Abstract” 标题：**Calibri 12pt 加粗**，左对齐  
+- 摘要正文：**Calibri 10.5pt**（约 12pt 行距），整栏宽度；标题下有细横线  
+- 关键词（`keywords` 环境）：*Keywords* 为 **10.5pt 斜体**，内容 **10pt**
+
+**图表标题**  
+- 图：`Fig.` 标签**蓝色加粗**，说明黑色；格式示例：`Fig. 1: …`  
+- 表：`Table` 标签**蓝色加粗**，说明黑色；与图一致
+
+---
+
+## 三、`.ttf` 字体怎么放、为什么放
+
+- **是什么**：`.ttf` 是 TrueType Font 文件。XeLaTeX / LuaLaTeX 通过 `fontspec` 直接加载。  
+- **放在哪里**：建议放在仓库的 `/` 目录，模板会**优先**加载本地 `.ttf`（常见命名如下）。
+  - `/times.ttf, timesbd.ttf, timesi.ttf, timesbi.ttf`
+  - `/calibri.ttf, calibrib.ttf, calibrii.ttf, calibriz.ttf`
+- **为什么要放**：
+  - 保证与官方的字体外观一致  
+  - **加快 Overleaf 编译**（避免在线检索系统字体）
+- **注意授权**：请确认字体的使用与分发许可。无授权不建议提交到仓库，可依赖系统字体。
+
+---
+
+## 四、项目结构与最小示例
+
+**最小 `main.tex`**：
 ```latex
 \documentclass{es-template} % 或 [draft]
 
-\title{Your Title}
-\authors{Author A, Author B}
-\affils{Affiliation line 1; Affiliation line 2}
-\date{\today}
+	itle{Your Title}
+uthors{Author A, Author B}
+ffils{Affiliation line 1; Affiliation line 2}
+\date{	oday}
 
-\begin{document}
+egin{document}
 \maketitle
 
-\begin{abstract}
+egin{abstract}
 在此填写摘要。
 \end{abstract}
 
 \section{Introduction}\label{sec-intro}
-Underwater landmarks,\cite{keyA,keyB} 见 \figref{fig:six-wide}，以及公式 Eq.~\eqref{eq:density}。
-消融实验见 \tabref{tab:ablation}。
+水下地标研究，参见\,\cite{keyA,keyB}；
+见 igref{fig:six-wide} 与 Eq.~\eqref{eq:density}；
+消融实验见 	abref{tab:ablation}。
 
-\begin{figure}[t]
+egin{figure}[t]
   \centering
-  \begin{subfigure}[t]{0.155\textwidth}\centering
+  egin{subfigure}[t]{0.155	extwidth}\centering
     \includegraphics[width=\linewidth]{figures/a.jpg}\caption{}\label{fig:a}
   \end{subfigure}\hfill
-  \begin{subfigure}[t]{0.155\textwidth}\centering
-    \includegraphics[width=\linewidth]{figures/b.jpg}\caption{}\label{fig:b}
-  \end{subfigure}\hfill
-  % ... 最多 6 个子图 ...
-  \caption{单行 1×N 图集示例。}\label{fig:six-wide}
+  % 可重复至 6 个子图（每块 0.155–0.16	extwidth）
+  \caption{单行 1×N 图集示例。}
+  \label{fig:six-wide}
 \end{figure}
 
-\begin{equation}
-  \rho_{\text{oil}}=\frac{m_{2}-m_{0}}{m_{1}-m_{0}}\,\rho_{\text{water}}
+egin{equation}
+  
+ho_{	ext{oil}}=rac{m_{2}-m_{0}}{m_{1}-m_{0}}\,
+ho_{	ext{water}}
   \label{eq:density}
 \end{equation}
 
@@ -59,127 +104,68 @@ Underwater landmarks,\cite{keyA,keyB} 见 \figref{fig:six-wide}，以及公式 E
 \end{document}
 ```
 
-### 编译
-- **引擎：** XeLaTeX 或 LuaLaTeX（类文件会强制检查）
-- **参考文献：** 使用 `biber`（不是 `bibtex`）
-- **Overleaf：** Menu → Compiler: XeLaTeX；Biber 自动运行
+---
+
+## 五、交叉引用与文献样式（按模板来）
+
+**文献引用**  
+- 单条：`...,\cite{keyA}`  
+- 多条：`...,\,\cite{keyA,keyB}`（**逗号也为上标**）  
+- 标点统一写在 `\cite` 前面；需要更紧凑可用 `\,` 提供细空格。
+
+**图/表/节/公式**  
+- 图：`\figref{fig:pipeline}` → *Fig. X*（蓝色可点击）  
+- 表：`\tabref{tab:ablation}` → *Table Y*  
+- 节：`\secref{sec-intro}` → *Section 1*  
+- 公式：`Eq.~\eqref{eq:loss}` 或 `\eqnref{eq:loss}` → “Eq. (1)”
+
+**参考文献（`biblatex + biber`）**  
+- 数值型、按出现顺序；**期刊名蓝色斜体**、文章标题黑色无引号、DOI 为 `doi: ...`  
+- Overleaf 建议 **Recompile from scratch** 再编两次，避免缓存导致的交叉引用问题。
 
 ---
 
-## 🆚 与原生 `article` 的差异
+## 六、图与 1×N 横排建议
 
-- 页面尺寸与边距匹配期刊 Word 模板
-- `\cite{...}` 输出为**蓝色上标** `[n]`；**多条**时逗号同为上标
-- 参考文献中期刊名为**蓝色斜体**；文章标题为黑色、无引号
-- 节标题字号为 `10.5pt`（Times）；`Fig.`/`Table` 标签为蓝色加粗且冒号分隔
-- 内置工具宏：`\figref`、`\tabref`、`\secref`、`\eqnref`、`\etal`、`\eg`
-- `subcaption` 与单栏 **1×N** 图集为首选用法
-
----
-
-## 🔗 交叉引用（本模板风格）
-
-### 文献引用
-```latex
-...,\cite{keyA}           % 单条
-...,\,\cite{keyA,keyB}    % 多条（逗号同为上标）
-```
-- 标点通常写在 `\cite` 之前；需要更细空隙可用 `\,`。
-
-### 图/表/节
-```latex
-\figref{fig:pipeline}                         % Fig. X（蓝色可点击）
-\figref{fig:pipeline}\subref{fig:pipeline-b}  % Fig. X(b)
-\tabref{tab:ablation}                         % Table Y
-\secref{sec-intro}                            % Section 1
-```
-
-### 公式
-```latex
-Eq.~\eqref{eq:loss}   % “Eq. (1)”
-% 或使用便捷宏
-\eqnref{eq:loss}
-```
-
----
-
-## 🖼 图与子图（单栏 1×N）
-
-**单图**
-```latex
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\linewidth]{figures/pipeline.pdf}
-  \caption{总体流程。}
-  \label{fig:pipeline}
-\end{figure}
-```
-
-**1×4 或 1×6 图集**
-```latex
-\begin{figure}[t]
-  \centering
-  \begin{subfigure}[t]{0.155\textwidth}\centering
-    \includegraphics[width=\linewidth]{figures/a.jpg}\caption{}\label{fig:a}
-  \end{subfigure}\hfill
-  % 最多 6 块（每块 0.155–0.16\textwidth）
-  \caption{单行 1×6 图集示例。}
-  \label{fig:six-wide}
-\end{figure}
-```
-- 避免同时设置 `width=` 与 `height=`；如需统一高度，使用 `height=..,keepaspectratio` 并省略 `width=`。
-- 调试阶段可用 `\documentclass[draft]{es-template}` 显示占位框。
-
----
-
-## 🧮 公式
-
-- 已启用 `amsmath`，可直接使用 `\eqref`；便捷宏 `\eqnref` 输出 “Eq. (n)”。  
-- 若需更接近 Times 的数学外观，可在类文件中启用：
+- 单图：
   ```latex
-  \RequirePackage{unicode-math}
-  \setmathfont{TeX Gyre Termes Math} % 或 XITS Math
+  egin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{figures/pipeline.pdf}
+    \caption{总体流程。}
+    \label{fig:pipeline}
+  \end{figure}
   ```
-- 示例：
+- 单行 1×6：
   ```latex
-  \begin{equation}
-    \rho_{\text{oil}}=\frac{m_{2}-m_{0}}{m_{1}-m_{0}}\,\rho_{\text{water}}
-    \label{eq:density}
-  \end{equation}
-  ... 参见 \eqnref{eq:density}。
+  egin{figure}[t]
+    \centering
+    egin{subfigure}[t]{0.155	extwidth}\centering
+      \includegraphics[width=\linewidth]{figures/a.jpg}\caption{}\label{fig:a}
+    \end{subfigure}\hfill
+    % 重复，最多 6 块
+    \caption{单行 1×6 图集示例。}
+    \label{fig:six-wide}
+  \end{figure}
   ```
+- **避免** 同时设 `width=` 与 `height=`。若要统一高度，用 `height=..,keepaspectratio`，去掉 `width=`。
 
 ---
 
-## 📚 参考文献（biblatex + biber）
+## 七、编译方式
 
-- 选项：`style=numeric`，`sorting=none`，`maxnames=minnames=99`
-- 期刊名：**蓝色斜体**；文章标题：黑色无引号
-- **多文献并列**时，**分隔逗号为上标**（模板已调整分隔符）
-
-> 若编译卡顿或引用异常，建议 Overleaf 使用 **Recompile from scratch** 清理缓存文件，然后再连续编译两遍。
+- 引擎：**XeLaTeX / LuaLaTeX**（类文件强制）  
+- 参考文献：**biber**（不是 bibtex）  
+- Overleaf：菜单中选择 XeLaTeX；biber 自动执行
 
 ---
 
-## 🅰️ 内置宏
+## 八、常见问题（快速定位）
 
-- 交叉引用：`\figref{...}`、`\tabref{...}`、`\secref{...}`、`\eqnref{...}`
-- 缩写：`\etal` → *et al.*；`\eg` → *e.g.*（均带智能点号与空格）
-- 其他：`\corr`（通讯作者 * 号）、`\email{...}`（等宽体邮件地址）
-
+1. **引擎报错**：仅支持 XeLaTeX / LuaLaTeX。  
 ---
 
-## 🙋 常见问答
+## 九、协议与说明
 
-**可以使用 `\cref{fig:...}` 吗？**  
-类文件未内置 `cleveref`。如果你偏好 `\cref`，请在 `main.tex` 添加：
-```latex
-\usepackage[nameinlink]{cleveref}
-\crefname{figure}{Fig.}{Figs.}
-\crefname{table}{Table}{Tables}
-\crefname{section}{Section}{Sections}
-```
+- 免责声明：本模板仅复现视觉风格，**不代表**官方格式完全一致；投稿以**官方最新要求**为准。
 
-
-**句末的句号会一起变成上标吗？**  
-不会。我们仅对每一条引用块和分隔符进行上标处理，后续标点保持基线。
