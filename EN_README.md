@@ -21,18 +21,6 @@
 
 ## 🔧 Quick Start
 
-### Recommended structure
-```
-project/
-├─ main.tex
-├─ es-template.cls
-├─ references.bib
-├─ figures/
-└─ fonts/                 # optional local Times/Calibri .ttf files
-   ├─ times.ttf, timesbd.ttf, timesi.ttf, timesbi.ttf
-   └─ calibri.ttf, calibrib.ttf, calibrii.ttf, calibriz.ttf
-```
-
 ### Minimal `main.tex`
 ```latex
 \documentclass{es-template} % or [draft]
