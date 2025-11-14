@@ -64,39 +64,38 @@
 
 **最小 `main.tex`**：
 ```latex
-\documentclass{es-template} % 或 [draft]
+\documentclass{es-template} % or [draft]
 
-	itle{Your Title}
-uthors{Author A, Author B}
-ffils{Affiliation line 1; Affiliation line 2}
-\date{	oday}
+\title{Your Title}
+\authors{Author A, Author B}
+\affils{Affiliation line 1; Affiliation line 2}
+\date{\today}
 
-egin{document}
+\begin{document}
 \maketitle
 
-egin{abstract}
-在此填写摘要。
+\begin{abstract}
+Your abstract text goes here.
 \end{abstract}
 
 \section{Introduction}\label{sec-intro}
-水下地标研究，参见\,\cite{keyA,keyB}；
-见 igref{fig:six-wide} 与 Eq.~\eqref{eq:density}；
-消融实验见 	abref{tab:ablation}。
+Underwater landmarks,\cite{keyA,keyB} see \figref{fig:six-wide} and Eq.~\eqref{eq:density}.
+Our ablation appears in \tabref{tab:ablation}.
 
-egin{figure}[t]
+\begin{figure}[t]
   \centering
-  egin{subfigure}[t]{0.155	extwidth}\centering
+  \begin{subfigure}[t]{0.155\textwidth}\centering
     \includegraphics[width=\linewidth]{figures/a.jpg}\caption{}\label{fig:a}
   \end{subfigure}\hfill
-  % 可重复至 6 个子图（每块 0.155–0.16	extwidth）
-  \caption{单行 1×N 图集示例。}
-  \label{fig:six-wide}
+  \begin{subfigure}[t]{0.155\textwidth}\centering
+    \includegraphics[width=\linewidth]{figures/b.jpg}\caption{}\label{fig:b}
+  \end{subfigure}\hfill
+  % ... up to six items ...
+  \caption{A one-line 1×N gallery.}\label{fig:six-wide}
 \end{figure}
 
-egin{equation}
-  
-ho_{	ext{oil}}=rac{m_{2}-m_{0}}{m_{1}-m_{0}}\,
-ho_{	ext{water}}
+\begin{equation}
+  \rho_{\text{oil}}=\frac{m_{2}-m_{0}}{m_{1}-m_{0}}\,\rho_{\text{water}}
   \label{eq:density}
 \end{equation}
 
