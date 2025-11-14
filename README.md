@@ -126,27 +126,29 @@ Our ablation appears in \tabref{tab:ablation}.
 
 ## 六、图与 1×N 横排建议
 
-- 单图：
-  ```latex
+**单图**
+```latex
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{figures/pipeline.pdf}
-  \caption{Overall pipeline.}
+  \caption{总体流程。}
   \label{fig:pipeline}
 \end{figure}
-- 单行 1×6：
-  ```latex
+```
+
+**单行 1×6 图集**
+```latex
 \begin{figure}[t]
   \centering
   \begin{subfigure}[t]{0.155\textwidth}\centering
     \includegraphics[width=\linewidth]{figures/a.jpg}\caption{}\label{fig:a}
   \end{subfigure}\hfill
-  % repeat up to six blocks (0.155–0.16\textwidth each)
-  \caption{One-line 1×6 gallery.}
+  % 最多 6 块（每块 0.155–0.16\textwidth）
+  \caption{单行 1×6 图集示例。}
   \label{fig:six-wide}
 \end{figure}
-  ```
-- **避免** 同时设 `width=` 与 `height=`。若要统一高度，用 `height=..,keepaspectratio`，去掉 `width=`。
+```
+> 避免同时设置 `width=` 与 `height=`；若需统一高度，使用 `height=..,keepaspectratio` 并省略 `width=`。
 
 ---
 
